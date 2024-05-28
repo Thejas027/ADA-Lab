@@ -1,36 +1,41 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
 
-class BubbleSort
+// #include <bits/stdc++.h>
+
+using namespace std;
+class InsertionSort
 {
 
 public:
       int sort(vector<int> &arr)
       {
             int count = 0;
-            bool flag = false;
             int n = arr.size();
-            for (int i = 0; i < n - 1; i++)
+            for (int i = 1; i < n; i++)
             {
-                  flag = false;
-                  for (int j = 0; j < n - i - 2; i++)
+                  int value = arr[i];
+                  int j = i - 1;
+                  while (j >= 0 && arr[j] > value)
                   {
-                        ++count;
-                        if (arr[j] > arr[j + 1])
-                        {
-                              swap(arr[j], arr[j + 1]);
-                              flag = true;
-                        }
+                        arr[j + 1] = arr[j];
+                        j--;
+                        count++;
                   }
-                  if (!flag)
-                        break;
+                  arr[j + 1] = value;
+                  count++;
             }
             return count;
       }
 };
 
-class Plotter1
+class Plotter
 {
+
 public:
       void plotter()
       {
@@ -39,47 +44,48 @@ public:
 
       void plot()
       {
-            ofstream bestFile("bubbleSortBest.txt", ios::app);
-            ofstream avgFile("bubbleSortAvg.txt", ios::app);
-            ofstream WorstFile("bubbleSortWorst.txt", ios::app);
+            ofstream bestCase("insertionBest.txt", ios::app);
+            ofstream avgCase("insertionAvg.txt", ios::app);
+            ofstream worstCase("insertionWorst.txt", ios::app);
 
             int n = 10;
-            while (n <= 30000)
+
+            while (n < 30000)
             {
                   vector<int> arr(n);
 
                   // worst case
                   for (int i = 0; i < n; i++)
                         arr[i] = n - i;
-                  int count = BS.sort(arr);
-                  WorstFile << n << "\t" << count << "\n";
+                  int count = IS.sort(arr);
+                  worstCase << n << "\t" << count << "\n";
 
                   // best case
-
                   for (int i = 0; i < n; i++)
                         arr[i] = i + 1;
-                  count = BS.sort(arr);
-                  bestFile << n << "\t" << count << "\n";
+                  count = IS.sort(arr);
+                  bestCase << n << "\t" << count << "\n";
 
                   // avg case
                   for (int i = 0; i < n; i++)
                         arr[i] = rand() % n;
-                  count = BS.sort(arr);
-                  avgFile << n << "\t" << count << "\n";
+                  count = IS.sort(arr);
+                  avgCase << n << "\t" << count << "\n";
 
-                  if (n < 10000)
+                  if (n < 30000)
                         n *= 10;
                   else
-                        n += 10000;
+                        n += 100000;
             }
       }
 
 private:
-      BubbleSort BS;
+      InsertionSort IS;
 };
 
 class Tester
 {
+
 public:
       void test()
       {
@@ -95,19 +101,19 @@ public:
 
             cout << "Array elements before sorting : ";
             for (auto ele : arr)
-                  cout << ele << "";
+                  cout << ele << " ";
             cout << "\n";
 
-            BS.sort(arr);
+            IS.sort(arr);
 
             cout << "Array elements after sorting : ";
             for (auto ele : arr)
-                  cout << ele << "";
+                  cout << ele << " ";
             cout << "\n";
       }
 
 private:
-      BubbleSort BS;
+      InsertionSort IS;
 };
 
 class Application
@@ -118,7 +124,7 @@ public:
             while (true)
             {
                   int key;
-                  cout << "Enter your choice \n1.To Test\n2.To plot\n3.To Exit\n";
+                  cout << "Enter your choice \n1.To Test\n2.To plot\n3.To Exit";
                   cin >> key;
 
                   switch (key)
@@ -143,7 +149,7 @@ public:
 
 private:
       Tester tester;
-      Plotter1 plotter;
+      Plotter plotter;
 };
 int main()
 

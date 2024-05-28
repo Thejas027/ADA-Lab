@@ -1,29 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class BubbleSort
+class SelectionSort
 {
-
 public:
       int sort(vector<int> &arr)
       {
             int count = 0;
-            bool flag = false;
             int n = arr.size();
             for (int i = 0; i < n - 1; i++)
             {
-                  flag = false;
-                  for (int j = 0; j < n - i - 2; i++)
+                  int min_idx = i;
+                  for (int j = i + 1; j < n; j++)
                   {
-                        ++count;
-                        if (arr[j] > arr[j + 1])
+                        if (arr[j] < arr[min_idx])
                         {
-                              swap(arr[j], arr[j + 1]);
-                              flag = true;
+                              min_idx = j;
+                              count++;
                         }
                   }
-                  if (!flag)
-                        break;
+                  if (min_idx != i)
+                  {
+                        swap(arr[i], arr[min_idx]);
+                  }
             }
             return count;
       }
@@ -39,9 +38,9 @@ public:
 
       void plot()
       {
-            ofstream bestFile("bubbleSortBest.txt", ios::app);
-            ofstream avgFile("bubbleSortAvg.txt", ios::app);
-            ofstream WorstFile("bubbleSortWorst.txt", ios::app);
+            ofstream bestFile("selectionSortBest.txt", ios::app);
+            ofstream avgFile("selectionSortAvg.txt", ios::app);
+            ofstream WorstFile("selectionSortWorst.txt", ios::app);
 
             int n = 10;
             while (n <= 30000)
@@ -51,20 +50,20 @@ public:
                   // worst case
                   for (int i = 0; i < n; i++)
                         arr[i] = n - i;
-                  int count = BS.sort(arr);
+                  int count = SS.sort(arr);
                   WorstFile << n << "\t" << count << "\n";
 
                   // best case
 
                   for (int i = 0; i < n; i++)
                         arr[i] = i + 1;
-                  count = BS.sort(arr);
+                  count = SS.sort(arr);
                   bestFile << n << "\t" << count << "\n";
 
                   // avg case
                   for (int i = 0; i < n; i++)
                         arr[i] = rand() % n;
-                  count = BS.sort(arr);
+                  count = SS.sort(arr);
                   avgFile << n << "\t" << count << "\n";
 
                   if (n < 10000)
@@ -75,7 +74,7 @@ public:
       }
 
 private:
-      BubbleSort BS;
+      SelectionSort SS;
 };
 
 class Tester
@@ -98,7 +97,7 @@ public:
                   cout << ele << "";
             cout << "\n";
 
-            BS.sort(arr);
+            SS.sort(arr);
 
             cout << "Array elements after sorting : ";
             for (auto ele : arr)
@@ -107,7 +106,7 @@ public:
       }
 
 private:
-      BubbleSort BS;
+      SelectionSort SS;
 };
 
 class Application
