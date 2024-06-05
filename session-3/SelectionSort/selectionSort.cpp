@@ -10,18 +10,18 @@ public:
             int n = arr.size();
             for (int i = 0; i < n - 1; i++)
             {
-                  int min_idx = i;
+                  int minIdx = i;
                   for (int j = i + 1; j < n; j++)
                   {
-                        if (arr[j] < arr[min_idx])
+                        if (arr[j] < arr[minIdx])
                         {
-                              min_idx = j;
+                              minIdx = j;
                               count++;
                         }
                   }
-                  if (min_idx != i)
+                  if (minIdx != i)
                   {
-                        swap(arr[i], arr[min_idx]);
+                        swap(arr[i], arr[minIdx]);
                   }
             }
             return count;
