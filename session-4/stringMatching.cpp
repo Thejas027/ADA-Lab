@@ -4,23 +4,25 @@ using namespace std;
 class StringMatching
 {
 public:
-      int match(string &str, string &pattern)
+      int match(const string &text, const string &pattern)
       {
             int count = 0;
-            int n = str.size();
+            int n = text.size();
             int m = pattern.size();
             for (int i = 0; i <= n - m; i++)
             {
                   int j = 0;
-                  while (j < m && str[i + j] == pattern[j])
+                  while (j < m)
                   {
                         count++;
+                        if (text[i + j] != pattern[j])
+                              break;
                         j++;
                   }
                   if (j == m)
-                        return count; // gives the total number of comparision
+                        return count; // Return count when pattern is found
             }
-            return count;
+            return count; // Return total count if pattern is not found
       }
 };
 
@@ -30,45 +32,37 @@ public:
       void plot()
       {
             srand(time(NULL));
-            //   files for best,worst and avg file
+
             ofstream bestFile("stringMatchingBest.txt", ios::app);
             ofstream avgFile("stringMatchingAvg.txt", ios::app);
             ofstream worstFile("stringMatchingWorst.txt", ios::app);
 
-            int n = 10;
-            while (n <= 30000)
+            string text(1000, 'a');
+            int m = 10;
+            while (m <= 1000)
             {
-                  string text(n, 'A');
                   string pattern;
 
-                  for (int i = 0; i < n; i++)
-                        text[i] = 'A' + (i % 26); // this line of code is used to generate a text from a to z
-
-                  // worst case
-                  pattern = string(n / 2, 'B'); // this generates a pattern of len of half of text size to compare with text string
-
+                  // Best case: pattern is a sequence of 'a's
+                  pattern = string(m, 'a');
                   int count = SM.match(text, pattern);
-                  worstFile << n << "\t" << count << "\n";
+                  bestFile << m << "\t" << count << "\n";
 
-                  // best case
-                  pattern = "A"; // pattern for best case with single comparision 
-
+                  // Worst case: last character of pattern is different
+                  pattern[m - 1] = 'b';
                   count = SM.match(text, pattern);
-                  bestFile << n << "\t" << count << "\n";
+                  worstFile << m << "\t" << count << "\n";
 
-                  // avg case
-                  for (int i = 0; i < n; i++)
-                        text[i] = 'A' + (rand() % 26);  // generates text for avg case 
-
-                  pattern = string(n / 2, 'A' + (rand() % 26));  // based on rand function it gives the pattern and text file 
-                  
+                  // Average case: pattern is a random sequence
+                  for (int i = 0; i < m; i++)
+                        pattern[i] = 'a' + rand() % 3;
                   count = SM.match(text, pattern);
-                  avgFile << n << "\t" << count << "\n";
+                  avgFile << m << "\t" << count << "\n";
 
-                  if (n < 10000)
-                        n *= 10;
+                  if (m < 100)
+                        m += 10;
                   else
-                        n += 10000;
+                        m += 100;
             }
       }
 
@@ -115,14 +109,11 @@ public:
                   case 1:
                         tester.test();
                         break;
-
                   case 2:
                         plotter.plot();
                         break;
-
                   case 3:
                         return;
-
                   default:
                         cout << "INVALID CHOICE. PLEASE TRY AGAIN...\n";
                         break;
