@@ -69,91 +69,67 @@ void tester()
 
 void plotter()
 {
-      FILE *f1, *f2;
-      int ch = 1;
+      FILE *f1 = fopen("e_best.txt", "a");
+      FILE *f2 = fopen("e_worst.txt", "a");
+      FILE *f3 = fopen("c_best.txt", "a");
+      FILE *f4 = fopen("c_worst.txt", "a");
+      FILE *f5 = fopen("m_best.txt", "a");
+      FILE *f6 = fopen("m_worst.txt", "a");
 
-      do
+      for (int i = 10; i <= 100; i += 10)
       {
-            int maxcount = 0, mincount = 10000;
-            for (int i = 10; i <= 100; i += 10)
+            int e_min = 10000, e_max = 0;
+            int c_min = 10000, c_max = 0;
+            int m_min = 10000, m_max = 0;
+
+            for (int j = 2; j <= i; j++)
             {
-                  for (int j = 2; j <= i; j++)
+                  for (int k = 2; k <= i; k++)
                   {
-                        for (int k = 2; k <= i; k++)
-                        {
-                              count = 0;
-                              switch (ch)
-                              {
-                              case 1:
-                                    count = euclid(j, k);
-                                    break;
-                              case 2:
-                                    count = consecutive(j, k);
-                                    break;
-                              case 3:
-                                    count = modified(j, k);
-                                    break;
-                              }
-                              if (count > maxcount)
-                                    maxcount = count;
-                              if (count < mincount)
-                                    mincount = count;
-                        }
+                        int count;
+
+                        // Euclid's method
+                        count = euclid(j, k);
+                        if (count > e_max)
+                              e_max = count;
+                        if (count < e_min)
+                              e_min = count;
+
+                        // Consecutive integer method
+                        count = consecutive(j, k);
+                        if (count > c_max)
+                              c_max = count;
+                        if (count < c_min)
+                              c_min = count;
+
+                        // Modified Euclid's method
+                        count = modified(j, k);
+                        if (count > m_max)
+                              m_max = count;
+                        if (count < m_min)
+                              m_min = count;
                   }
-                  switch (ch)
-                  {
-                  case 1:
-                        f1 = fopen("e_best.txt", "a");
-                        f2 = fopen("e_worst.txt", "a");
-                        break;
-                  case 2:
-                        f1 = fopen("c_best.txt", "a");
-                        f2 = fopen("c_worst.txt", "a");
-                        break;
-                  case 3:
-                        f1 = fopen("m_best.txt", "a");
-                        f2 = fopen("m_worst.txt", "a");
-                        break;
-                  }
-                  fprintf(f1, "%d\t%d\n", i, mincount);
-                  fprintf(f2, "%d\t%d\n", i, maxcount);
-                  fclose(f1);
-                  fclose(f2);
             }
-            ch++;
-      } while (ch <= 3);
+
+            fprintf(f1, "%d\t%d\n", i, e_min);
+            fprintf(f2, "%d\t%d\n", i, e_max);
+            fprintf(f3, "%d\t%d\n", i, c_min);
+            fprintf(f4, "%d\t%d\n", i, c_max);
+            fprintf(f5, "%d\t%d\n", i, m_min);
+            fprintf(f6, "%d\t%d\n", i, m_max);
+      }
+
+      fclose(f1);
+      fclose(f2);
+      fclose(f3);
+      fclose(f4);
+      fclose(f5);
+      fclose(f6);
 }
 
 int main()
 {
-      int ch;
-      do
-      {
-            printf("1. Tester\n2. Plotter\n3. Exit\n");
-            printf("Enter your choice: ");
-            scanf("%d", &ch);
-            switch (ch)
-            {
-            case 1:
-                  tester();
-                  break;
-            case 2:
-                  plotter();
-                  break;
-            case 3:
-                  break;
-            default:
-                  printf("Invalid choice. Please try again.\n");
-            }
-      } while (ch != 3);
+      plotter();
+      tester();
       return 0;
 }
-
-// OR another method to call the main program to reduce some more lines of code
-
-// int main()
-// {
-//       tester();
-//       plotter();
-//       return 0;
-// }
