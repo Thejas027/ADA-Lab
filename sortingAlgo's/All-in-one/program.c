@@ -126,27 +126,15 @@ void plotter()
       FILE *f5 = fopen("bubbleAvg.txt", "a");
       FILE *f6 = fopen("insertionAvg.txt", "a");
       FILE *f7 = fopen("selection.txt", "a");
-      if (!f1 || !f2 || !f3 || !f4 || !f5 || !f6 || !f7) // Check if files were opened successfully
-      {
-            printf("Error opening files!\n");
-            return;
-      }
 
       while (n < 30000)
       {
             arr1 = (int *)malloc(sizeof(int) * n);
             arr2 = (int *)malloc(sizeof(int) * n);
             arr3 = (int *)malloc(sizeof(int) * n);
-            if (!arr1 || !arr2 || !arr3)
-            {
-                  printf("Memory allocation failed!\n");
-                  return;
-            }
 
             // Best case
-            count1 = 0;
-            count2 = 0;
-            count3 = 0;
+            count1 = 0, count2 = 0, count3 = 0;
             for (int i = 0; i < n; i++)
             {
                   arr1[i] = i + 1;
@@ -162,8 +150,6 @@ void plotter()
             fprintf(f7, "%d\t%d\n", n, count3);
 
             // avg case
-            count1 = 0;
-            count2 = 0;
             for (int i = 0; i < n; i++)
             {
                   arr1[i] = rand() % n;
@@ -192,6 +178,7 @@ void plotter()
 
             free(arr1);
             free(arr2);
+            free(arr3);
       }
 
       fclose(f1);
@@ -200,6 +187,7 @@ void plotter()
       fclose(f4);
       fclose(f5);
       fclose(f6);
+      fclose(f7);
       printf("Data entered to file.\n");
 }
 
