@@ -87,31 +87,17 @@ void tester()
       for (int i = 0; i < n; i++)
             scanf("%d", &arr[i]);
 
-      int choice;
-      printf("Enter\n1.Bubble sort\n2.Insertion sort\n3.Selection sort\n");
-      scanf("%d", &choice);
+      printf("sorted array using bubble sort.\n");
+      bubbleSort(arr, n);
+      printArray(arr, n);
 
-      switch (choice)
-      {
-      case 1:
-            printf("sorted array using bubble sort.\n");
-            bubbleSort(arr, n);
-            printArray(arr, n);
-            break;
-      case 2:
-            printf("sorted array using insertion sort.\n");
-            insertionSort(arr, n);
-            printArray(arr, n);
-            break;
-      case 3:
-            printf("sorted array using selection sort.\n");
-            selectionSort(arr, n);
-            printArray(arr, n);
-            break;
-      default:
-            printf("invalid choice.\n");
-            break;
-      }
+      printf("\n\nsorted array using insertion sort.\n");
+      insertionSort(arr, n);
+      printArray(arr, n);
+
+      printf("\n\nsorted array using selection sort.\n");
+      selectionSort(arr, n);
+      printArray(arr, n);
 }
 
 void plotter()
@@ -193,23 +179,7 @@ void plotter()
 
 int main()
 {
-      int choice;
-      printf("Enter\n1. To test\n2.To plot\n");
-      scanf("%d", &choice);
-
-      switch (choice)
-      {
-      case 1:
-            tester();
-            break;
-
-      case 2:
-            plotter();
-            break;
-
-      default:
-            printf("Invalid choice.\n");
-            break;
-      }
+      tester();
+      plotter();
       return 0;
 }

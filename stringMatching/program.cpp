@@ -6,7 +6,6 @@ int stringMatching(string &text, string &pattern)
       int count = 0;
       int n = text.size();
       int m = pattern.size();
-      bool found = false;
 
       for (int i = 0; i <= n - m; i++)
       {
@@ -19,13 +18,8 @@ int stringMatching(string &text, string &pattern)
                   j++;
             }
             if (j == m)
-            {
-                  cout << "Pattern found at index " << i << ".\n";
-                  found = true;
-            }
+                  count++;
       }
-      if (!found)
-            cout << "Pattern not found.\n";
       return count;
 }
 
@@ -85,34 +79,7 @@ void plotter()
 
 int main()
 {
-      int choice;
-
-      while (true)
-      {
-            cout << "Select an option:\n";
-            cout << "1. Run Tester\n";
-            cout << "2. Run Plotter\n";
-            cout << "0. Exit\n";
-            cout << "Enter your choice: ";
-            cin >> choice;
-            cin.ignore(); // To ignore the newline character left in the buffer
-
-            switch (choice)
-            {
-            case 1:
-                  tester();
-                  break;
-            case 2:
-                  plotter();
-                  break;
-            case 0:
-                  cout << "Exiting...\n";
-                  return 0;
-            default:
-                  cout << "Invalid choice. Please try again.\n";
-                  break;
-            }
-      }
-
+      tester();
+      plotter();
       return 0;
 }
