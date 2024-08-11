@@ -148,3 +148,12 @@ int main()
       } while (ch != 3);
       return 0;
 }
+
+// OR another method to call the main program to reduce some more lines of code
+
+// int main()
+// {
+//       tester();
+//       plotter();
+//       return 0;
+// }

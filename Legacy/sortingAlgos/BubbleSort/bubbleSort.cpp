@@ -89,7 +89,7 @@ public:
 
             vector<int> arr(n);
 
-            cout << "Enter the elements to arrray : ";
+            cout << "Enter the elements to array : ";
             for (int i = 0; i < n; i++)
                   cin >> arr[i];
 
@@ -118,7 +118,7 @@ public:
             while (true)
             {
                   int key;
-                  cout << "Enter your choice \n1.To Test\n2.To plot\n3.To Exit\n";
+                  cout << "Enter your choice \n1.To Test\n2.To plot\n0.To Exit\n";
                   cin >> key;
 
                   switch (key)
