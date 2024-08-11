@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int count1, count2;
+int count1, count2, count3;
 
 void bubbleSort(int *arr, int n)
 {
@@ -44,6 +44,28 @@ void insertionSort(int *arr, int n)
       }
 }
 
+void selectionSort(int *arr, int n)
+{
+      count3 = 0;
+
+      for (int i = 0; i < n; i++)
+      {
+            int minIdx = i;
+            for (int j = i + 1; j < n; j++)
+            {
+                  count3++;
+                  if (arr[j] < arr[minIdx])
+                        minIdx = j;
+            }
+            if (minIdx != i)
+            {
+                  int temp = arr[minIdx];
+                  arr[minIdx] = arr[i];
+                  arr[i] = temp;
+            }
+      }
+}
+
 void printArray(int *arr, int n)
 {
       printf("Sorted array: ");
@@ -66,7 +88,7 @@ void tester()
             scanf("%d", &arr[i]);
 
       int choice;
-      printf("Enter\n1.Bubble sort\n2.Insertion sort\n");
+      printf("Enter\n1.Bubble sort\n2.Insertion sort\n3.Selection sort\n");
       scanf("%d", &choice);
 
       switch (choice)
@@ -81,6 +103,11 @@ void tester()
             insertionSort(arr, n);
             printArray(arr, n);
             break;
+      case 3:
+            printf("sorted array using selection sort.\n");
+            selectionSort(arr, n);
+            printArray(arr, n);
+            break;
       default:
             printf("invalid choice.\n");
             break;
@@ -90,7 +117,7 @@ void tester()
 void plotter()
 {
       int n = 10;
-      int *arr1, *arr2;
+      int *arr1, *arr2, *arr3;
       srand(time(NULL));
       FILE *f1 = fopen("bubbleBest.txt", "a");
       FILE *f2 = fopen("insertionBest.txt", "a");
@@ -98,8 +125,8 @@ void plotter()
       FILE *f4 = fopen("insertionWorst.txt", "a");
       FILE *f5 = fopen("bubbleAvg.txt", "a");
       FILE *f6 = fopen("insertionAvg.txt", "a");
-
-      if (!f1 || !f2 || !f3 || !f4 || !f5 || !f6) // Check if files were opened successfully
+      FILE *f7 = fopen("selection.txt", "a");
+      if (!f1 || !f2 || !f3 || !f4 || !f5 || !f6 || !f7) // Check if files were opened successfully
       {
             printf("Error opening files!\n");
             return;
@@ -109,8 +136,8 @@ void plotter()
       {
             arr1 = (int *)malloc(sizeof(int) * n);
             arr2 = (int *)malloc(sizeof(int) * n);
-
-            if (!arr1 || !arr2)
+            arr3 = (int *)malloc(sizeof(int) * n);
+            if (!arr1 || !arr2 || !arr3)
             {
                   printf("Memory allocation failed!\n");
                   return;
@@ -119,16 +146,20 @@ void plotter()
             // Best case
             count1 = 0;
             count2 = 0;
+            count3 = 0;
             for (int i = 0; i < n; i++)
             {
                   arr1[i] = i + 1;
                   arr2[i] = i + 1;
+                  arr3[i] = i;
             }
             bubbleSort(arr1, n);
             insertionSort(arr2, n);
+            selectionSort(arr3, n);
 
             fprintf(f1, "%d\t%d\n", n, count1);
             fprintf(f2, "%d\t%d\n", n, count2);
+            fprintf(f7, "%d\t%d\n", n, count3);
 
             // avg case
             count1 = 0;
