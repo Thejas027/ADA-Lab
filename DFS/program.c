@@ -3,7 +3,7 @@
 
 #define MAX 100
 
-int graph[MAX][MAX], visited[MAX], isCyclic = 0;
+int graph[MAX][MAX], visited[MAX], arr[MAX][MAX], isCyclic = 0;
 int path[MAX];
 int dfsCount = 0, count = 0, dcount = 0;
 int d;
@@ -94,8 +94,69 @@ void tester()
             printf("Graph is not cyclic\n");
 }
 
+void plotter(int k)
+{
+      int v;
+      FILE *f1 = fopen("best.txt", "a");
+      FILE *f2 = fopen("worst.txt", "a");
+
+      for (int i = 1; i <= 10; i++)
+      {
+            v = i;
+            if (k == 0)
+            {
+                  for (int j = 0; j < v; j++)
+                  {
+                        for (int k = 0; k < v; k++)
+                        {
+                              if (j != k)
+                                    arr[j][k] = 1;
+                              else
+                                    arr[j][k] = 0;
+                        }
+                  }
+            }
+            else
+            {
+                  for (int j = 0; j < v; j++)
+                  {
+                        for (int k = 0; k < v; k++)
+                              arr[j][k] = 0;
+                  }
+                  for (int j = 0; j < v - 1; j++)
+                        arr[j][j + 1] = 1;
+            }
+
+            dfsCount = 0, dcount = 0, count = 0, isCyclic = 0;
+            dfs(v, 0, -1);
+            dfsCount++;
+
+            int start = 1;
+
+            while (count != v)
+            {
+                  if (!visited[start])
+                  {
+                        dfs(v, start, -1);
+                        dfsCount++;
+                  }
+                  start++;
+            }
+            if (k == 0)
+                  fprintf(f2, "%d\t%d\n", v, dcount);
+            else
+                  fprintf(f1, "%d\t%d\n", v, dcount);
+      }
+      fclose(f1);
+      fclose(f2);
+}
+
 int main()
 {
       tester();
+      printf("\n\n\nfrom plotter function just ignore it the output generating after this \n\n\n\n");
+      for (int i = 0; i < 2; i++)
+            plotter(i);
+      printf("data entered to file.\n");
       return 0;
 }
