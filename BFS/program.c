@@ -76,8 +76,73 @@ void tester()
             printf("Graph has no cycle.\n");
 }
 
+void plotter(int k)
+{
+      FILE *f1 = fopen("best.txt", "a");
+      FILE *f2 = fopen("worst.txt", "a");
+
+      int v;
+
+      for (int i = 1; i <= 10; i++)
+      {
+            v = i;
+            if (k == 0)
+            {
+                  for (int j = 0; j < v; j++)
+                  {
+                        for (int k = 0; k < v; k++)
+                        {
+                              if (j != k)
+                                    graph[j][k] = 1;
+                              else
+                                    graph[j][k] = 0;
+                        }
+                  }
+            }
+            else
+            {
+                  for (int j = 0; j < v; j++)
+                  {
+                        for (int k = 0; k < v; k++)
+                              graph[j][k] = 0;
+                  }
+
+                  for (int j = 0; j < v; j++)
+                        graph[j][j + 1] = 1;
+            }
+
+            bfsCount = 0, orderCount = 0, count = 0;
+            bfs(v, 0);
+            bfsCount++;
+            int start = 1;
+
+            while (count != v)
+            {
+                  if (!visited[start])
+                  {
+                        bfs(v, start);
+                        bfsCount++;
+                  }
+                  start++;
+            }
+
+            if (k == 0)
+                  fprintf(f2, "%d\t%d\n", v, orderCount);
+            else
+                  fprintf(f1, "%d\t%d\n", v, orderCount);
+      }
+
+      fclose(f1);
+      fclose(f2);
+}
+
 int main()
 {
       tester();
+
+      printf("\n\n\nfrom plotter function just ignore it the output generating after this \n\n\n\n");
+      for (int i = 0; i < 2; i++)
+            plotter(i);
+      printf("\ndata entered to file.\n");
       return 0;
 }
