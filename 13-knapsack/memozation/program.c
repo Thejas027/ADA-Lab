@@ -64,11 +64,12 @@ void tester()
       printf("\n");
 }
 
+// try with different cases atleast for 3 cases take that cases n and count value and make it plot to obatin the graph
 void plotter()
 {
       tester();
       FILE *f1 = fopen("knapsack.txt", "a");
-      fprintf(f1, "%d\t%d\n", n, count); // Writing n and count to the file
+      fprintf(f1, "%d\t%d\n", n, count);
       fclose(f1);
 }
 
