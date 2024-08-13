@@ -3,7 +3,7 @@
 
 #define MAX 100
 
-int graph[MAX][MAX], visited[MAX], arr[MAX][MAX], isCyclic = 0;
+int graph[MAX][MAX], visited[MAX], isCyclic = 0;
 int path[MAX];
 int dfsCount = 0, count = 0, dcount = 0;
 int d;
@@ -110,9 +110,9 @@ void plotter(int k)
                         for (int k = 0; k < v; k++)
                         {
                               if (j != k)
-                                    arr[j][k] = 1;
+                                    graph[j][k] = 1;
                               else
-                                    arr[j][k] = 0;
+                                    graph[j][k] = 0;
                         }
                   }
             }
@@ -121,10 +121,10 @@ void plotter(int k)
                   for (int j = 0; j < v; j++)
                   {
                         for (int k = 0; k < v; k++)
-                              arr[j][k] = 0;
+                              graph[j][k] = 0;
                   }
                   for (int j = 0; j < v - 1; j++)
-                        arr[j][j + 1] = 1;
+                        graph[j][j + 1] = 1;
             }
 
             dfsCount = 0, dcount = 0, count = 0, isCyclic = 0;

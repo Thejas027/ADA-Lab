@@ -183,35 +183,3 @@ int main()
       plotter();
       return 0;
 }
-
-// void plotter2()
-// {
-//       int n = 10;
-//       int *best, *avg, *worst;
-//       srand(time(NULL));
-//       FILE *f1 = fopen("bubble.txt", "a");
-//       FILE *f2 = fopen("insertion.txt", "a");
-//       FILE *f3 = fopen("selection.txt", "a");
-
-//       while (n < 30000)
-//       {
-//             best = (int *)malloc(sizeof(int) * n);
-//             avg = (int *)malloc(sizeof(int) * n);
-//             worst = (int *)malloc(sizeof(int) * n);
-
-//             // bubble sort
-//             count1 = 0, count2 = 0, count3 = 0;
-
-//             for (int i = 0; i < n; i++)
-//             {
-//                   best[i] = i + 1;
-//                   avg[i] = rand() % n;
-//                   worst[i] = n - i;
-//             }
-//             bubbleSort(best, n);
-//             bubbleSort(avg, n);
-//             bubbleSort(worst, n);
-
-//             fprintf(f1,"%d")
-//       }
-// }
