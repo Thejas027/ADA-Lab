@@ -57,8 +57,86 @@ void tester()
 	printf("\n");
 }
 
+void plotter(int k)
+{
+	FILE *f1 = fopen("best.txt", "a");
+	FILE *f2 = fopen("worst.txt", "a");
+
+	int v;
+
+	for (int i = 1; i <= 10; i++)
+	{
+		v = i;
+		int **arr = (int **)malloc(v * sizeof(int *));
+		for (int j = 0; j < v; j++)
+			arr[j] = (int *)malloc(v * sizeof(int));
+
+		if (k == 0)
+		{
+			for (int i = 0; i < v; i++)
+			{
+				for (int j = 0; j < v; j++)
+				{
+					if (i != j)
+						arr[i][j] = 1;
+					else
+						arr[i][j] = 0;
+				}
+			}
+		}
+
+		if (k == 1)
+		{
+			for (int i = 0; i < v; i++)
+			{
+				for (int j = 0; j < v; j++)
+					arr[i][j] = 0;
+			}
+
+			for (int i = 0; i < v - 1; i++)
+				arr[i][i + 1] = 1;
+		}
+
+		// Copy arr to graph for processing
+		for (int i = 0; i < v; i++)
+		{
+			for (int j = 0; j < v; j++)
+				graph[i][j] = arr[i][j];
+			visited[i] = 0;
+			path[i] = 0;
+		}
+
+		top = -1;
+		cycle = 0;
+
+		count = 0;
+		for (int i = 0; i < v; i++)
+		{
+			if (visited[i] == 0)
+				dfs(v, i);
+		}
+
+		if (k == 0)
+			fprintf(f2, "%d\t%d\n", v, count);
+		else
+			fprintf(f1, "%d\t%d\n", v, count);
+
+		// Free allocated memory
+		for (int i = 0; i < v; i++)
+			free(arr[i]);
+		free(arr);
+	}
+
+	fclose(f1);
+	fclose(f2);
+}
+
 int main()
 {
 	tester();
+
+	for (int i = 0; i < 2; i++)
+		plotter(i);
+	printf("\ndata added.\n");
 	return 0;
 }
