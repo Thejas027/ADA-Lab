@@ -31,6 +31,7 @@ int consecutive(int m, int n)
             min--;
             count++;
       }
+      return m;
 }
 
 int modified(int m, int n)
