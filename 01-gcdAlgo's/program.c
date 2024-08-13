@@ -83,7 +83,6 @@ void plotter()
             {
                   for (int k = 2; k <= i; k++)
                   {
-                        int count;
 
                         // Euclid's method
                         count = euclid(j, k);

@@ -4,18 +4,21 @@
 int count = 0;
 int graph[100][100];
 
+
 void warshallsAlgo(int n)
 {
+
       for (int k = 0; k < n; k++)
       {
             for (int i = 0; i < n; i++)
             {
-                  if (graph[i][k] != 0)
+                  if (graph[i][k] == 1)
                   {
                         for (int j = 0; j < n; j++)
                         {
-                              graph[i][j] = (graph[i][j] || (graph[i][k] && graph[k][j]));
                               count++;
+                              if (graph[k][j] == 1)
+                                    graph[i][j] = 1;
                         }
                   }
             }
