@@ -108,7 +108,6 @@ void plotter(int k)
 
 		top = -1;
 		cycle = 0;
-
 		count = 0;
 		for (int i = 0; i < v; i++)
 		{

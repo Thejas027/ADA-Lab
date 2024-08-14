@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int graph[100][100], stack[100], indegree[100];
-int count, opcount, top;
+int graph[100][100], indegree[100];
+int count, opcount;
+int stack[100], top;
 char arr[100];
 
 void toposort(int n, int start)

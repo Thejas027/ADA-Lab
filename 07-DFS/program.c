@@ -50,18 +50,7 @@ void tester()
       printf("Enter 1 if it's a directed graph: ");
       scanf("%d", &d);
 
-      printf("Adjacency Matrix:\n");
-      for (int i = 0; i < n; i++)
-      {
-            for (int j = 0; j < n; j++)
-                  printf("%d\t", graph[i][j]);
-            printf("\n");
-      }
-
-      isCyclic = 0;
-      dcount = 0;
-      count = 0;
-      dfsCount = 0;
+      isCyclic = 0, dcount = 0, dfsCount = 0, count = 0;
 
       for (int i = 0; i < n; i++)
       {
