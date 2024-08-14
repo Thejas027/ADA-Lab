@@ -18,13 +18,9 @@ int stringMatching(char *text, char *pattern, int n, int m)
                   j++;
             }
             if (j == m)
-            {
-                  printf("THE PATTERN FOUND \n");
                   return count;
-            }
       }
-      printf("THE PATTERN not found \n");
-      return count;
+      return -1;
 }
 
 void tester()
@@ -50,6 +46,10 @@ void tester()
             printf("pattern matched.\n");
             printf("Number of comparisons : %d", result);
       }
+}
+
+void plotter()
+{
 }
 
 int main()
