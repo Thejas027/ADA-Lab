@@ -4,6 +4,7 @@
 
 int t[MAX][MAX], v[MAX], w[MAX], n, m;
 int count = 0;
+ 
 int max(int a, int b)
 {
 	return a > b ? a : b;

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include<time.h>
+#include <time.h>
 
 int count = 0;
 
@@ -15,7 +15,9 @@ int stringMatching(char *text, char *pattern, int n, int m)
             {
                   count++;
                   if (pattern[j] != text[i + j])
+                  {
                         break;
+                  }
                   j++;
             }
             if (j == m)

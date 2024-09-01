@@ -35,7 +35,7 @@ void mergeSort(int *arr, int start, int end)
 {
       if (start < end)
       {
-            int mid = start + (end - start) / 2;
+            int mid = (start + end) / 2;
             mergeSort(arr, start, mid);
             mergeSort(arr, mid + 1, end);
             merge(arr, start, mid, end);
@@ -46,7 +46,7 @@ void worst(int *arr, int start, int end)
 {
       if (start < end)
       {
-            int mid = start + (end - start) / 2;
+            int mid = (start + end) / 2;
             int n1 = mid - start + 1;
             int n2 = end - mid;
             int a[n1], b[n2];
@@ -112,9 +112,9 @@ void plotter()
             // worst case
             count = 0;
             worst(arr, 0, n - 1);
-            for (int i = 0; i < n; i++)
-                  fprintf(f4, "%d ", arr[i]);
-            fprintf(f4, "\n");
+            // for (int i = 0; i < n; i++)
+            //       fprintf(f4, "%d ", arr[i]);
+            // fprintf(f4, "\n");
             mergeSort(arr, 0, n - 1);
             fprintf(f2, "%d\t%d\n", n, count);
 
