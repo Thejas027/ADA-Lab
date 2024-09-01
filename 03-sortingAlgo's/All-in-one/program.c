@@ -46,8 +46,6 @@ void insertionSort(int *arr, int n)
 
 void selectionSort(int *arr, int n)
 {
-      count3 = 0;
-
       for (int i = 0; i < n; i++)
       {
             int minIdx = i;
@@ -55,7 +53,9 @@ void selectionSort(int *arr, int n)
             {
                   count3++;
                   if (arr[j] < arr[minIdx])
+                  {
                         minIdx = j;
+                  }
             }
             if (minIdx != i)
             {
@@ -93,10 +93,6 @@ void tester()
       printf("\n\nsorted array using insertion sort.\n");
       insertionSort(arr, n);
       printArray(arr, n);
-
-      printf("\n\nsorted array using selection sort.\n");
-      selectionSort(arr, n);
-      printArray(arr, n);
 }
 
 void plotter()
@@ -110,13 +106,11 @@ void plotter()
       FILE *f4 = fopen("insertionWorst.txt", "a");
       FILE *f5 = fopen("bubbleAvg.txt", "a");
       FILE *f6 = fopen("insertionAvg.txt", "a");
-      FILE *f7 = fopen("selection.txt", "a");
 
       while (n < 30000)
       {
             arr1 = (int *)malloc(sizeof(int) * n);
             arr2 = (int *)malloc(sizeof(int) * n);
-            arr3 = (int *)malloc(sizeof(int) * n);
 
             // Best case
             count1 = 0, count2 = 0, count3 = 0;
@@ -124,15 +118,12 @@ void plotter()
             {
                   arr1[i] = i + 1;
                   arr2[i] = i + 1;
-                  arr3[i] = i;
             }
             bubbleSort(arr1, n);
             insertionSort(arr2, n);
-            selectionSort(arr3, n);
 
             fprintf(f1, "%d\t%d\n", n, count1);
             fprintf(f2, "%d\t%d\n", n, count2);
-            fprintf(f7, "%d\t%d\n", n, count3);
 
             // avg case
             for (int i = 0; i < n; i++)
@@ -172,7 +163,6 @@ void plotter()
       fclose(f4);
       fclose(f5);
       fclose(f6);
-      fclose(f7);
       printf("Data entered to file.\n");
 }
 
